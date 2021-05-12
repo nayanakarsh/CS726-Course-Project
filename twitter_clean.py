@@ -39,15 +39,7 @@ def cleaner(tmpL):
 	# send to tweet_processor
 	tmpL = ' '.join([w for w in tmpL.split(' ')])
 	tmpL = p.clean(tmpL)
-
-	# # hashtag segmentation
-	# tmpH = []
-	# for w in tk.tokenize(tmpL):
-	# 	if w.startswith('#'): 
-	# 		w = ' '.join(segment(w))
-	# 	tmpH.append(w)
-	# tmpL = ' '.join(tmpH)
-
+	
 	# expand word contractions
 	tmpL = contractions.fix(tmpL)
 
