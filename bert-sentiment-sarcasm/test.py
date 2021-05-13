@@ -49,20 +49,11 @@ def sentence_prediction(sentence):
 
     outputs = outputs[0]
 
-<<<<<<< HEAD:bert-sentiment-sarcasm/test.py
-  
-
-=======
->>>>>>> 6d8663df0d32e83e5cf4bd84e163f4496ddfe3b1:eval.py
 
     l = np.exp(outputs) / np.sum(np.exp(outputs), axis=0)
 
     return l
 
-<<<<<<< HEAD:bert-sentiment-sarcasm/test.py
-
-=======
->>>>>>> 6d8663df0d32e83e5cf4bd84e163f4496ddfe3b1:eval.py
 
 MODEL = BERTBaseUncased()
 MODEL.load_state_dict(torch.load(config.MODEL_PATH))
