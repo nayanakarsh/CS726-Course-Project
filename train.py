@@ -15,18 +15,18 @@ from transformers import get_linear_schedule_with_warmup
 
 
 def run():
-    # dfx = pd.read_csv(config.TRAINING_FILE).fillna("none")
+    dfx = pd.read_csv(config.TRAINING_FILE).fillna("none")
 
 
-    n = sum(1 for line in open(config.TRAINING_FILE)) - 1 #number of records in file (excludes header)
-    s = 200 #desired sample size
-    skip = sorted(random.sample(range(1,n+1),n-s)) #the 0-indexed header will not be included in the skip list
-    dfx = pd.read_csv(config.TRAINING_FILE, skiprows=skip).fillna("none")
+    # n = sum(1 for line in open(config.TRAINING_FILE)) - 1 #number of records in file (excludes header)
+    # s = 200 #desired sample size
+    # skip = sorted(random.sample(range(1,n+1),n-s)) #the 0-indexed header will not be included in the skip list
+    # dfx = pd.read_csv(config.TRAINING_FILE, skiprows=skip).fillna("none")
 
-    # dfx = dfx[:200]
+    dfx = dfx[:200]
 
 
-    dfx.type = dfx.type.apply(lambda x: 2 if x == "SARCASM" else (1 if x == "positive" else 0))
+    dfx.type = dfx.type.apply(lambda x: 2 if x == "SARCASM" else (1 if x == "POSITIVE" else 0))
 
     df_train, df_valid = model_selection.train_test_split(
         dfx, test_size=0.1, random_state=42, stratify=dfx.type.values
