@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-df = pd.read_csv('twitter_cleaned.csv')
+df = pd.read_csv('./input/twitter_cleaned.csv')
 
 ds = df.sample(frac=1)
 
@@ -10,5 +10,5 @@ ds = df.sample(frac=1)
 # # Delete first
 # df = df.drop([first_column], axis=1)
 
-ds.to_csv('twitter_cleaned_1.csv',index=False)
+ds.to_csv('./input/twitter_cleaned_1.csv',index=False)
 

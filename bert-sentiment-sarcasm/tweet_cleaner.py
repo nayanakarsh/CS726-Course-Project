@@ -249,7 +249,7 @@ def remove_emoji(string):
     return emoji_pattern.sub(r'', string)
 
 
-trump_df = pd.read_csv('twitter_airline.csv')
+trump_df = pd.read_csv('./input/oneline_all_labels.csv')
 
 REPLACE_NO_SPACE = re.compile("(\.)|(\;)|(\:)|(\!)|(\')|(\?)|(\,)|(\")|(\|)|(\()|(\))|(\[)|(\])|(\%)|(\$)|(\>)|(\<)|(\{)|(\})")
 REPLACE_WITH_SPACE = re.compile("(<br\s/><br\s/?)|(-)|(/)|(:).")
@@ -335,7 +335,7 @@ trump_df = trump_df.loc[mask]
 
 # trump_df['statement'] =  trump_df[trump_df['statement'].apply(lambda x: len(x) > 3)]
 
-trump_df.to_csv('twitter_cleaned_1.csv') #specify location
+trump_df.to_csv('./input/twitter_cleaned.csv') #specify location
 
 
 

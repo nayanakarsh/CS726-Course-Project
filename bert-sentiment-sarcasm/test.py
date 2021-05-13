@@ -49,35 +49,14 @@ def sentence_prediction(sentence):
 
     outputs = outputs[0]
 
-    # print(outputs)
+  
 
 
     l = np.exp(outputs) / np.sum(np.exp(outputs), axis=0)
 
-    # e_x = np.exp(outputs - np.max(outputs)) 
-
-    # l =  e_x / e_x.sum(axis=0) 
-
-    # print(l)
-
     return l
 
-    # outputs = torch.sigmoid(outputs).cpu().detach().numpy()
-    # # print(outputs)
-    # return outputs[0]
 
-def predict(sentence):
-    start_time = time.time()
-    sarcasm_prediction = sentence_prediction(sentence)
-    notsarcasm_prediction = 1 - sarcasm_prediction
-    response = {}
-    response["response"] = {
-        "sarcasm": str(sarcasm_prediction),
-        "not_sarcasm": str(notsarcasm_prediction),
-        "sentence": str(sentence),
-        "time_taken": str(time.time() - start_time),
-    }
-    return response
 
 MODEL = BERTBaseUncased()
 MODEL.load_state_dict(torch.load(config.MODEL_PATH))
@@ -101,9 +80,6 @@ if __name__ == "__main__":
     label = 'SARCASM' if x == 2 else ('POSITIVE' if x == 1 else 'NEGATIVE')
 
     print(label,line['statement'],x)
-
-
-    # label = 'SARCASM' if round(float(x['response']['sarcasm'])) == 1 else 'NOT_SARCASM'
 
     ans.append(f"{label}")
 

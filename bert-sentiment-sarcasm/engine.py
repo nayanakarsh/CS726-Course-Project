@@ -6,9 +6,6 @@ from tqdm import tqdm
 def loss_fn(outputs, targets):
 
    
-
-    # print(targets.view(-1, 1))
-
     return nn.CrossEntropyLoss()(outputs, targets)
 
 
@@ -32,10 +29,6 @@ def train_fn(data_loader, model, optimizer, device, scheduler):
         optimizer.zero_grad()
         outputs = model(ids=ids, mask=mask, token_type_ids=token_type_ids)
 
-
-        print(outputs)
-
-        print(targets)
 
         loss = loss_fn(outputs, targets)
         loss.backward()
@@ -62,18 +55,9 @@ def eval_fn(data_loader, model, device):
             outputs = model(ids=ids, mask=mask, token_type_ids=token_type_ids)
 
 
-            print(outputs)
-
-            print(targets)
-
 
             fin_targets.extend(targets.cpu().detach().numpy().tolist())
             fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
-
-
-            print(fin_outputs)
-
-            print(fin_targets)
 
 
 
