@@ -49,35 +49,11 @@ def sentence_prediction(sentence):
 
     outputs = outputs[0]
 
-    # print(outputs)
-
 
     l = np.exp(outputs) / np.sum(np.exp(outputs), axis=0)
 
-    # e_x = np.exp(outputs - np.max(outputs)) 
-
-    # l =  e_x / e_x.sum(axis=0) 
-
-    # print(l)
-
     return l
 
-    # outputs = torch.sigmoid(outputs).cpu().detach().numpy()
-    # # print(outputs)
-    # return outputs[0]
-
-def predict(sentence):
-    start_time = time.time()
-    sarcasm_prediction = sentence_prediction(sentence)
-    notsarcasm_prediction = 1 - sarcasm_prediction
-    response = {}
-    response["response"] = {
-        "sarcasm": str(sarcasm_prediction),
-        "not_sarcasm": str(notsarcasm_prediction),
-        "sentence": str(sentence),
-        "time_taken": str(time.time() - start_time),
-    }
-    return response
 
 MODEL = BERTBaseUncased()
 MODEL.load_state_dict(torch.load(config.MODEL_PATH))
@@ -85,7 +61,7 @@ MODEL.to(DEVICE)
 MODEL.eval()
 
 if __name__ == "__main__":
-  # df = pd.read_csv('twitter_cleaned.csv')
+
   df = pd.read_csv(config.TESTING_FILE)
 
   df = df[-490:]
@@ -93,8 +69,6 @@ if __name__ == "__main__":
   print(df.head())
   for idx, line in tqdm(df.iterrows()):
     x = sentence_prediction(line['statement'])
-
-    # print(x)
 
     x =  np.argmax(x)
 
