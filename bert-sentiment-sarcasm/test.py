@@ -49,14 +49,20 @@ def sentence_prediction(sentence):
 
     outputs = outputs[0]
 
+<<<<<<< HEAD:bert-sentiment-sarcasm/test.py
   
 
+=======
+>>>>>>> 6d8663df0d32e83e5cf4bd84e163f4496ddfe3b1:eval.py
 
     l = np.exp(outputs) / np.sum(np.exp(outputs), axis=0)
 
     return l
 
+<<<<<<< HEAD:bert-sentiment-sarcasm/test.py
 
+=======
+>>>>>>> 6d8663df0d32e83e5cf4bd84e163f4496ddfe3b1:eval.py
 
 MODEL = BERTBaseUncased()
 MODEL.load_state_dict(torch.load(config.MODEL_PATH))
@@ -64,7 +70,7 @@ MODEL.to(DEVICE)
 MODEL.eval()
 
 if __name__ == "__main__":
-  # df = pd.read_csv('twitter_cleaned.csv')
+
   df = pd.read_csv(config.TESTING_FILE)
 
   df = df[-490:]
@@ -72,8 +78,6 @@ if __name__ == "__main__":
   print(df.head())
   for idx, line in tqdm(df.iterrows()):
     x = sentence_prediction(line['statement'])
-
-    # print(x)
 
     x =  np.argmax(x)
 
