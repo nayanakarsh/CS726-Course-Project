@@ -45,9 +45,26 @@ def sentence_prediction(sentence):
 
     outputs = MODEL(ids=ids, mask=mask, token_type_ids=token_type_ids)
 
-    outputs = torch.sigmoid(outputs).cpu().detach().numpy()
-    print(outputs)
-    return outputs[0]
+    outputs = outputs.cpu().detach().numpy()
+
+    outputs = outputs[0]
+
+    # print(outputs)
+
+
+    l = np.exp(outputs) / np.sum(np.exp(outputs), axis=0)
+
+    # e_x = np.exp(outputs - np.max(outputs)) 
+
+    # l =  e_x / e_x.sum(axis=0) 
+
+    # print(l)
+
+    return l
+
+    # outputs = torch.sigmoid(outputs).cpu().detach().numpy()
+    # # print(outputs)
+    # return outputs[0]
 
 def predict(sentence):
     start_time = time.time()
@@ -68,16 +85,22 @@ MODEL.to(DEVICE)
 MODEL.eval()
 
 if __name__ == "__main__":
-  df = pd.read_csv(config.TRAINING_FILE)
-  df = df[-1000:]
+  # df = pd.read_csv('twitter_cleaned.csv')
+  df = pd.read_csv(config.TESTING_FILE)
+
+  df = df[-490:]
   ans = []
   print(df.head())
   for idx, line in tqdm(df.iterrows()):
     x = sentence_prediction(line['statement'])
 
+    # print(x)
+
     x =  np.argmax(x)
 
-    label = 'SARCASM' if x == 2 else ('positive' if x == 1 else 'negative')
+    label = 'SARCASM' if x == 2 else ('POSITIVE' if x == 1 else 'NEGATIVE')
+
+    print(label,line['statement'],x)
 
 
     # label = 'SARCASM' if round(float(x['response']['sarcasm'])) == 1 else 'NOT_SARCASM'
