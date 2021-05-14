@@ -23,7 +23,7 @@ def run():
     # skip = sorted(random.sample(range(1,n+1),n-s)) #the 0-indexed header will not be included in the skip list
     # dfx = pd.read_csv(config.TRAINING_FILE, skiprows=skip).fillna("none")
 
-    dfx = dfx[:200]
+    dfx = dfx[:1000]
 
 
     dfx.type = dfx.type.apply(lambda x: 2 if x == "SARCASM" else (1 if x == "POSITIVE" else 0))

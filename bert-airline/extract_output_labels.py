@@ -3,7 +3,7 @@ import config
 
 df = pd.read_csv(config.TESTING_FILE)
 
-df = df[-490:]
+df = df[-1000:]
 
 a = list(df['type'])
 

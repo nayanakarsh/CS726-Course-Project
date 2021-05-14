@@ -67,7 +67,7 @@ if __name__ == "__main__":
   # df = pd.read_csv('twitter_cleaned.csv')
   df = pd.read_csv(config.TESTING_FILE)
 
-  df = df[-490:]
+  df = df[-1000:]
   ans = []
   print(df.head())
   for idx, line in tqdm(df.iterrows()):
